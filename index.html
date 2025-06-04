@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escova Alisadora - Compre Agora e Pague na Entrega</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #333;
+      line-height: 1.6;
+    }
+    header, section, footer {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    header {
+      background-color: #ff69b4;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    .cta-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #28a745;
+      color: white;
+      border: none;
+      font-size: 18px;
+      margin: 20px 0;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    .benefits ul {
+      padding-left: 20px;
+    }
+    .testimonial {
+      background: #f9f9f9;
+      padding: 10px;
+      border-left: 4px solid #ff69b4;
+      margin-bottom: 10px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .badges img {
+      width: 100px;
+      margin-right: 10px;
+    }
+    footer {
+      font-size: 14px;
+      color: #777;
+      text-align: center;
+    }
+  </style>
+  <script>
+    async function enviarPedido(event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const nome = form.nome.value;
+      const whatsapp = form.whatsapp.value;
+      const cep = form.cep.value;
+      const endereco = form.endereco.value;
+
+      const dados = {
+        nome,
+        whatsapp,
+        cep,
+        endereco
+      };
+
+      try {
+        const resposta = await fetch('https://script.google.com/macros/s/AKfycbykx1caHYl0Lf6AeQYjVJc9ABal332S3MaHz5MZbpScY10V4pxO1Q55rptA6xp6T107/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dados)
+        });
+
+        alert("Pedido enviado com sucesso! Você receberá a confirmação em breve.");
+        form.reset();
+      } catch (error) {
+        alert("Erro ao enviar o pedido. Tente novamente.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Cabelos Lisos em Minutos!</h1>
+    <p>Compre agora e pague só quando receber – 100% seguro!</p>
+  </header>
+
+  <section>
+    <img src="https://via.placeholder.com/600x300" alt="Escova Alisadora em uso" style="width:100%; border-radius: 8px;"/>
+  </section>
+
+  <section class="benefits">
+    <h2>Benefícios da Escova Alisadora</h2>
+    <ul>
+      <li>Alisa até 2x mais rápido que chapinha comum</li>
+      <li>Reduz danos causados pelo calor</li>
+      <li>Fácil de usar – é só pentear!</li>
+      <li>Ideal para todos os tipos de cabelo</li>
+      <li>Leve, prática e portátil</li>
+    </ul>
+  </section>
+
+  <section class="testimonials">
+    <h2>O que nossas clientes dizem</h2>
+    <div class="testimonial">"Uso todo dia antes de sair para o trabalho. Maravilhosa!" – Juliana, SP</div>
+    <div class="testimonial">"Me livrei da chapinha, essa escova é tudo!" – Carla, RJ</div>
+  </section>
+
+  <section class="urgency">
+    <h2>Últimas Unidades com Frete Grátis!</h2>
+    <p>Faça seu pedido agora e pague só na entrega com total segurança.</p>
+  </section>
+
+  <section class="formulario">
+    <h2>Peça Agora</h2>
+    <form onsubmit="enviarPedido(event)">
+      <input type="text" name="nome" placeholder="Nome completo" required />
+      <input type="tel" name="whatsapp" placeholder="WhatsApp com DDD" required />
+      <input type="text" name="cep" placeholder="CEP" required />
+      <textarea name="endereco" placeholder="Endereço completo (rua, número, complemento, bairro, cidade, UF)" required></textarea>
+      <button type="submit" class="cta-button">Quero Receber Agora</button>
+    </form>
+  </section>
+
+  <section class="badges">
+    <img src="https://via.placeholder.com/100x50?text=100%25+Seguro" alt="Compra Segura"/>
+    <img src="https://via.placeholder.com/100x50?text=Pagamento+na+Entrega" alt="Pagamento na Entrega"/>
+  </section>
+
+  <footer>
+    <p>Perguntas frequentes | Política de privacidade | © 2025 Sua Marca</p>
+  </footer>
+</body>
+</html>
