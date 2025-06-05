@@ -63,6 +63,15 @@
       color: #777;
       text-align: center;
     }
+    .mensagem {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #28a745;
+      font-weight: bold;
+    }
+    .mensagem.erro {
+      color: #dc3545;
+    }
   </style>
   <script>
     async function enviarPedido(event) {
@@ -73,6 +82,7 @@
       const whatsapp = form.elements['whatsapp'].value;
       const cep = form.elements['cep'].value;
       const endereco = form.elements['endereco'].value;
+      const mensagemDiv = document.getElementById('mensagem');
 
       const dados = {
         nome,
@@ -80,6 +90,9 @@
         cep,
         endereco
       };
+
+      mensagemDiv.textContent = "";
+      mensagemDiv.className = "mensagem";
 
       try {
         const resposta = await fetch('https://script.google.com/macros/s/AKfycbzy7eNbw9Q6_srNz6hbM865wVSdddUIgblG11jVFwMciMORmlktT7Xrng1VCCdz43mA/exec', {
@@ -91,13 +104,15 @@
         });
 
         if (resposta.ok) {
-          alert("Pedido enviado com sucesso! Você receberá a confirmação em breve.");
+          mensagemDiv.textContent = "Pedido enviado com sucesso! Você receberá a confirmação em breve.";
           form.reset();
         } else {
-          alert("Erro ao enviar o pedido. Tente novamente mais tarde.");
+          mensagemDiv.textContent = "Erro ao enviar o pedido. Tente novamente mais tarde.";
+          mensagemDiv.classList.add('erro');
         }
       } catch (error) {
-        alert("Erro ao enviar o pedido. Tente novamente.");
+        mensagemDiv.textContent = "Erro ao enviar o pedido. Tente novamente.";
+        mensagemDiv.classList.add('erro');
       }
     }
   </script>
@@ -109,7 +124,7 @@
   </header>
 
   <section>
-    <img src="https://utimix.com/wp-content/uploads/2022/05/anion-hair-escova-alisadora-3-em-1-alisa-seca-e-hidrata-com-luzes-de-ions-bivolt.gif" alt="Escova Alisadora em uso" style="width:100%; border-radius: 8px;"/>
+    <img src="https://utimix.com/wp-content/uploads/2022/05/anion-hair-escova-alisadora-3-em-1-alisa-seca-e-hidrata-com-luzes-de-ions-bivolt.gif" alt="Escova Alisadora em uso" style="width:100%; border-radius:8px;">
   </section>
 
   <section class="benefits">
@@ -136,6 +151,7 @@
 
   <section class="formulario">
     <h2>Peça Agora</h2>
+    <div id="mensagem" class="mensagem"></div>
     <form onsubmit="enviarPedido(event)">
       <input type="text" name="nome" placeholder="Nome completo" required />
       <input type="tel" name="whatsapp" placeholder="WhatsApp com DDD" required />
