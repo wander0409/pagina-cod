@@ -52,6 +52,7 @@
       margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      box-sizing: border-box;
     }
     .badges img {
       width: 100px;
@@ -68,10 +69,10 @@
       event.preventDefault();
 
       const form = event.target;
-      const nome = form.nome.value;
-      const whatsapp = form.whatsapp.value;
-      const cep = form.cep.value;
-      const endereco = form.endereco.value;
+      const nome = form.elements['nome'].value;
+      const whatsapp = form.elements['whatsapp'].value;
+      const cep = form.elements['cep'].value;
+      const endereco = form.elements['endereco'].value;
 
       const dados = {
         nome,
@@ -89,8 +90,12 @@
           body: JSON.stringify(dados)
         });
 
-        alert("Pedido enviado com sucesso! Você receberá a confirmação em breve.");
-        form.reset();
+        if (resposta.ok) {
+          alert("Pedido enviado com sucesso! Você receberá a confirmação em breve.");
+          form.reset();
+        } else {
+          alert("Erro ao enviar o pedido. Tente novamente mais tarde.");
+        }
       } catch (error) {
         alert("Erro ao enviar o pedido. Tente novamente.");
       }
@@ -104,7 +109,7 @@
   </header>
 
   <section>
-    <img src="https://utimix.com/wp-content/uploads/2022/05/anion-hair-escova-alisadora-3-em-1-alisa-seca-e-hidrata-com-luzes-de-ions-bivolt.gif." alt="Escova Alisadora em uso" style="width:100%; border-radius: 8px;"/>
+    <img src="https://utimix.com/wp-content/uploads/2022/05/anion-hair-escova-alisadora-3-em-1-alisa-seca-e-hidrata-com-luzes-de-ions-bivolt.gif" alt="Escova Alisadora em uso" style="width:100%; border-radius: 8px;"/>
   </section>
 
   <section class="benefits">
